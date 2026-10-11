@@ -1,6 +1,6 @@
 # VL53L4CD-Laser-Tripwire
 
-VL53L4CD sensor laser tripwire project. This project lets the user monitor VL53L4CD distance readings from their device, provided it has an internet connection and uses an app that connects to an MQTT broker.
+VL53L4CD sensor laser tripwire project. This project lets the user monitor VL53L4CD distance readings from their device, provided it has an internet connection and connects to an MQTT broker.
 
 To use the code, the user can first fill in their MQTT broker URI, network SSID and password. You may be required to add the ESP-MQTT dependency, as it is not available in ESP-IDF Version 6.0. In the ESP-IDF terminal: idf.py add-dependency "espressif/mqtt"
 
