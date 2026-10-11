@@ -330,7 +330,7 @@ void wifi_init() {
 
     wifi_event_group = xEventGroupCreate();
 
-    //Intialize TCP/IP stack, provides hardware with logic required
+    //Initialize TCP/IP stack, provides hardware with logic required
     //to translate raw wireless signals into structured web data
     ESP_ERROR_CHECK(esp_netif_init());
 
