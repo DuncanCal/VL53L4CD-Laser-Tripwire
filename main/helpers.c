@@ -281,10 +281,13 @@ void i2c_receive(void *pvParameters) {
                 //store distance measurements
                 char payload[54];
 
+                //Print distance to ESP-IDF terminal
                 ESP_LOGI(TAG1, "Distance in mm: %" PRIu16 "\n", result.distance_mm);
 
+                //Handles logic for distance readings sets motion_active and out_of_range flags
                 handle_distance(result.distance_mm);
 
+                //Publish MQTT messages
                 if (motion_active && !out_of_range) {
 
                     snprintf(payload, sizeof(payload), "Movement detected, Distance (mm): %u",  result.distance_mm);
@@ -293,6 +296,7 @@ void i2c_receive(void *pvParameters) {
 
                 } else if(out_of_range) {
 
+                    //currently using max distance of 1200mm - can be increased
                     snprintf(payload, sizeof(payload), "Out of Range");
                     esp_mqtt_client_publish(client, "sensors/vl53l4cd/distance_mm", payload, 0, 1, 0);
 
@@ -330,7 +334,7 @@ void wifi_init() {
 
     wifi_event_group = xEventGroupCreate();
 
-    //Intialize TCP/IP stack, provides hardware with logic required
+    //Initialize TCP/IP stack, provides hardware with logic required
     //to translate raw wireless signals into structured web data
     ESP_ERROR_CHECK(esp_netif_init());
 
